@@ -169,14 +169,29 @@ button {
 }
 
 .brand-img-logo {
-  height: 52px;
+  height: 72px;
+  max-height: 78px;
   width: auto;
   object-fit: contain;
   transition: var(--transition);
 }
 
 .brand-img-logo:hover {
-  transform: scale(1.03);
+  transform: scale(1.04);
+}
+
+.footer-logo {
+  height: 78px;
+  max-height: 84px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 18px;
+  display: block;
+  transition: var(--transition);
+}
+
+.footer-logo:hover {
+  transform: scale(1.04);
 }
 
 .brand-chakra-icon {
