@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">MahaVastu Article Reader | Acharya Montu Singh</title>
+  <meta name="description" content="Read full MahaVastu articles, space programming techniques, and Astro-Vastu insights by Acharya Montu Singh." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Dedicated Article Page Styles */
+    .article-page-header {
+      background: linear-gradient(rgba(20, 16, 13, 0.75), rgba(20, 16, 13, 0.85)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #FFF;
+      padding: 80px 0 60px;
+      position: relative;
+    }
+    .article-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--mv-sand);
+      margin-bottom: 20px;
+    }
+    .article-breadcrumb a {
+      color: var(--mv-sand);
+      text-decoration: underline;
+    }
+    .article-main-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: #FFF;
+      line-height: 1.2;
+      margin-bottom: 22px;
+      max-width: 960px;
+    }
+    .article-meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #E2D7C5;
+      font-size: 0.95rem;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      margin: 60px auto;
+    }
+    .article-content-wrapper {
+      background: #FFFFFF;
+      border: 1px solid var(--mv-border);
+      border-radius: var(--mv-radius-lg);
+      padding: 48px;
+      box-shadow: var(--mv-shadow-md);
+    }
+    .article-featured-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: var(--mv-radius-md);
+      margin-bottom: 36px;
+      box-shadow: var(--mv-shadow-sm);
+    }
+    .article-text-body {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--mv-text-primary);
+    }
+    .article-text-body p {
+      margin-bottom: 24px;
+    }
+    .article-text-body h3 {
+      font-size: 1.6rem;
+      margin: 38px 0 16px;
+      color: var(--mv-dark);
+      position: relative;
+      padding-left: 14px;
+    }
+    .article-text-body h3::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      background: var(--mv-red);
+      border-radius: 2px;
+    }
+    .article-text-body ul, .article-text-body ol {
+      margin: 0 0 28px 24px;
+    }
+    .article-text-body li {
+      margin-bottom: 12px;
+    }
+    .article-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .sidebar-widget {
+      background: #FFFFFF;
+      border: 1px solid var(--mv-border);
+      border-radius: var(--mv-radius-md);
+      padding: 28px;
+      box-shadow: var(--mv-shadow-sm);
+    }
+    .sidebar-widget h4 {
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+    .sidebar-widget h4::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 32px;
+      height: 2px;
+      background: var(--mv-red);
+    }
+    .author-card-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--mv-sand);
+      border: 3px solid var(--mv-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--mv-dark);
+      font-family: 'Cinzel', serif;
+      margin-bottom: 14px;
+    }
+    .consult-sidebar-box {
+      background: linear-gradient(135deg, #241E18, #18140F);
+      color: #FFF;
+      border: 1px solid var(--mv-gold);
+      border-radius: var(--mv-radius-md);
+      padding: 28px;
+      text-align: center;
+    }
+    .consult-sidebar-box h4 {
+      color: #FFF;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+    .consult-sidebar-box p {
+      color: #C8BCAC;
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+    .related-post-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--mv-border-light);
+      cursor: pointer;
+    }
+    .related-post-item:hover h5 {
+      color: var(--mv-red);
+    }
+    .related-post-thumb {
+      width: 70px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .related-post-item h5 {
+      font-size: 0.92rem;
+      line-height: 1.4;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: var(--mv-dark);
+      transition: color 0.2s;
+    }
+    .share-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--mv-border);
+    }
+    @media (max-width: 992px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .article-content-wrapper {
+        padding: 28px 20px;
+      }
+      .article-featured-img {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-contacts">
+        <a href="tel:+917998566666">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          +91 7998566666
+        </a>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Mumbai &amp; Chennai Consultations
+        </span>
+      </div>
+      <div class="top-badge">
+        ✦ Certified MahaVastu &amp; Astro-Vastu Expert
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo-area">
+        <div class="brand-chakra-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/>
+            <path d="M12 3v18M3 12h18M5.64 5.64l12.72 12.72M5.64 18.36L18.36 5.64" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>MAHAVASTU</h1>
+          <span>Acharya Montu Singh • Blog</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Home &amp; All Articles</a></li>
+          <li><a href="index.html#direction-guide">16 Direction Guide</a></li>
+          <li><a href="index.html#how-it-works">Consultation Steps</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta-group">
+        <a href="https://wa.me/917998566666?text=Hello%20Montu%20Singh%20Sir,%20I%20am%20reading%20your%20blog%20and%20want%20to%20consult." target="_blank" class="btn-primary">
+          <span>WhatsApp Consult</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Banner Header -->
+  <section class="article-page-header">
+    <div class="container">
+      <div class="article-breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <a href="index.html#articles">Articles</a>
+        <span>›</span>
+        <span id="breadcrumbCategory">Category</span>
+      </div>
+
+      <h1 class="article-main-title" id="articleTitle">Loading Article...</h1>
+
+      <div class="article-meta-bar">
+        <span class="category-tag" id="articleCategoryTag" style="background: var(--mv-red); color: #FFF; border: none;">Category</span>
+        <span id="articleZoneTag">📍 Zone</span>
+        <span>•</span>
+        <span id="articleDate">Date</span>
+        <span>•</span>
+        <span id="articleReadTime">5 min read</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Content & Sidebar -->
+  <main class="container article-layout">
+    <article class="article-content-wrapper">
+      <img id="articleImage" class="article-featured-img" src="" alt="Article cover image" />
+      
+      <div class="article-text-body" id="articleBody">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="share-strip">
+        <span style="font-weight: 700; color: var(--mv-dark);">Consult On This Topic:</span>
+        <a id="shareWhatsAppBtn" href="#" target="_blank" class="btn-whatsapp" style="font-size: 0.85rem; padding: 8px 18px;">
+          Ask Montu Singh on WhatsApp
+        </a>
+        <a href="index.html" class="btn-secondary" style="font-size: 0.85rem; padding: 8px 18px;">
+          ← Browse More Articles
+        </a>
+      </div>
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="article-sidebar">
+      <!-- Author Profile Box -->
+      <div class="sidebar-widget">
+        <div class="author-card-avatar" id="authorInitial">M</div>
+        <h4 id="authorName" style="margin-bottom: 4px;">Acharya Montu Singh</h4>
+        <p style="color: var(--mv-red); font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;" id="authorRole">
+          7-Star Certified MahaVastu Expert
+        </p>
+        <p style="color: var(--mv-text-secondary); font-size: 0.9rem; line-height: 1.6;" id="authorBio">
+          Mentored by Dr. Khushdeep Bansal, recipient of the Maharashtra Gaurav Award and Asia's Best Astro-Vastu Expert.
+        </p>
+      </div>
+
+      <!-- Quick Consultation Card -->
+      <div class="consult-sidebar-box">
+        <h4>Need Space Audit?</h4>
+        <p>Book a personal on-site or floor plan consultation across Mumbai, Chennai, and globally.</p>
+        <a href="https://wa.me/917998566666?text=Hi%20Montu%20Singh%20Sir,%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" class="btn-whatsapp" style="width: 100%; justify-content: center; box-shadow: none;">
+          Connect on WhatsApp
+        </a>
+        <a href="tel:+917998566666" style="display: block; margin-top: 14px; color: var(--mv-sand); font-size: 0.88rem;">
+          Or call +91 7998566666
+        </a>
+      </div>
+
+      <!-- Related Insights Widget -->
+      <div class="sidebar-widget">
+        <h4>Recommended Reads</h4>
+        <div id="relatedPostsList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>MAHAVASTU MONTU SINGH</h4>
+        <p>Scientific space alchemy, 16 direction balancing, and non-demolition cures mentored by Dr. Khushdeep Bansal.</p>
+        <p style="color: var(--mv-sand);"><strong>Consultation Centers:</strong> Mumbai &amp; Chennai</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pancha Tattvas</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#articles">Jal (Water) - Opportunities</a></li>
+          <li><a href="index.html#articles">Agni (Fire) - Liquidity &amp; Drive</a></li>
+          <li><a href="index.html#articles">Prithvi (Earth) - Stability</a></li>
+          <li><a href="index.html#articles">Akash (Space) - Gains &amp; Profits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#how-it-works">Commercial Factory Audit</a></li>
+          <li><a href="index.html#how-it-works">Residential Astro-Vastu</a></li>
+          <li><a href="index.html#how-it-works">Geopathic Stress Neutralization</a></li>
+          <li><a href="index.html#how-it-works">Zero Demolition Cures</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Direct Contact</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+917998566666">📞 +91 7998566666</a></li>
+          <li><a href="https://wa.me/917998566666" target="_blank">💬 WhatsApp Direct</a></li>
+          <li><a href="#">📍 Mumbai &amp; Chennai</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 MahaVastu Acharya Montu Singh. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Extract query parameter ?id=...
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get('id') || 'vastu-remedies-without-demolition';
+
+      const post = window.BLOG_POSTS.find(p => p.id === articleId) || window.BLOG_POSTS[0];
+
+      // Update Page Content
+      document.getElementById('pageTitle').textContent = post.title + " | MahaVastu Acharya Montu Singh";
+      document.getElementById('breadcrumbCategory').textContent = post.category;
+      document.getElementById('articleTitle').textContent = post.title;
+      document.getElementById('articleCategoryTag').textContent = post.category;
+      document.getElementById('articleZoneTag').textContent = "📍 " + post.zone;
+      document.getElementById('articleDate').textContent = post.date;
+      document.getElementById('articleReadTime').textContent = post.readTime;
+      
+      const img = document.getElementById('articleImage');
+      img.src = post.image;
+      img.alt = post.title;
+
+      document.getElementById('articleBody').innerHTML = post.content;
+
+      // Author Info
+      document.getElementById('authorName').textContent = post.author.name;
+      document.getElementById('authorRole').textContent = post.author.role;
+      if (post.author.bio) {
+        document.getElementById('authorBio').textContent = post.author.bio;
+      }
+
+      // WhatsApp Share button
+      const waBtn = document.getElementById('shareWhatsAppBtn');
+      waBtn.href = `https://wa.me/917998566666?text=${encodeURIComponent("Hello Acharya Montu Singh Sir, I am reading your article '" + post.title + "' and would like to ask a question regarding my property.")}`;
+
+      // Populate Related Articles
+      const relatedList = document.getElementById('relatedPostsList');
+      const otherPosts = window.BLOG_POSTS.filter(p => p.id !== post.id).slice(0, 4);
+
+      relatedList.innerHTML = otherPosts.map(item => `
+        <div class="related-post-item" onclick="window.location.href='article.html?id=${item.id}'">
+          <img src="${item.image}" alt="${item.title}" class="related-post-thumb">
+          <div>
+            <h5>${item.title}</h5>
+            <span style="font-size: 0.78rem; color: var(--mv-text-muted);">${item.readTime} • ${item.category}</span>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+</body>
+</html>
