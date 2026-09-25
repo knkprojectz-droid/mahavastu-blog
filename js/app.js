@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="card-excerpt">${post.excerpt}</p>
           <div class="card-footer">
             <span>By ${post.author.name}</span>
-            <a href="article.html?id=${post.id}" target="_blank" class="read-more-btn" onclick="event.stopPropagation()">
+            <a href="article.html?id=${post.id}" class="read-more-btn" onclick="event.stopPropagation()">
               Read Full Article ↗
             </a>
           </div>
